@@ -15,5 +15,4 @@ public class TransferContext {
     public void showTransfer(Bank bank, Socket socket) throws IOException, ClassNotFoundException {
         transferOperation.operaton(bank, socket);
     }
-
 }

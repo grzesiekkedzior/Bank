@@ -72,5 +72,4 @@ public class Server {
         Scanner in = new Scanner(socket.getInputStream());
         return in.nextLine();
     }
-
 }

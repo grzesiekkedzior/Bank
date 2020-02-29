@@ -36,7 +36,6 @@ public class TransferServer {
             putDataToTransferMoney(socket);
             getTransactionData(socket);
         }
-
     }
 
     private static void getTransactionData(Socket socket) throws IOException, ClassNotFoundException {
@@ -75,6 +74,4 @@ public class TransferServer {
         InetAddress inetAddress = Inet4Address.getLocalHost();
         return new Socket(inetAddress, 59090);
     }
-
-
 }

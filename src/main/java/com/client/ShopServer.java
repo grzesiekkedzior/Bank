@@ -38,7 +38,6 @@ public class ShopServer {
             getWithdrawMoneyObject(socket);
             getTransactionData(socket);
         }
-
     }
 
     private static void getWithdrawMoneyObject(Socket socket) throws IOException, ClassNotFoundException {

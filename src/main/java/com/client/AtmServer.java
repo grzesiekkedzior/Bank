@@ -21,10 +21,7 @@ public class AtmServer {
             sendAtmName(atm, socket);
             System.out.println(atm.menu());
             menu(socket);
-
-
         }
-
     }
 
     private static void menu(Socket socket) throws IOException, ClassNotFoundException {
