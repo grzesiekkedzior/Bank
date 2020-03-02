@@ -83,7 +83,6 @@ public class TableDataBase {
         }
     }
 
-
     private Map<Integer, Integer> getMaximumWidhtofTable(List<String> headersList, List<List<String>> rowsList) {
         Map<Integer, Integer> columnMaxWidthMapping = new HashMap<>();
 

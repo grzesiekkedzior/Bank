@@ -3,11 +3,15 @@ package com.company;
 import com.bank.Account;
 import com.bank.Bank;
 import com.table.TableDataBase;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 
+@Getter
+@Setter
 public class Millenium extends Bank {
     public static final String RED_BOLD = "\033[1;31m";
     public static final String GREEN_BOLD = "\033[1;32m";
@@ -89,13 +93,5 @@ public class Millenium extends Bank {
 
     private void addNewRecord(String name, String surname, int money, int pin) {
         getAccountList().add(new Account(new Client(name, surname),money, pin));
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
     }
 }

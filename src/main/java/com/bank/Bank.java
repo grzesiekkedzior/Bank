@@ -1,10 +1,12 @@
 package com.bank;
 
 import com.table.TableDataBase;
+import lombok.Getter;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class Bank implements BankMenu, Serializable{
     private List<Account> accountList = new ArrayList<>();

@@ -1,5 +1,10 @@
 package com.client;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Shop {
     private static final String GREEN_BOLD = "\033[1;32m";
     private final String name = "shop";
@@ -14,17 +19,5 @@ public class Shop {
                 "----------- 2. XBOX 30$ -----------\n" +
                 "-----------------------------------\n";
         return menu;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getBOOK() {
-        return BOOK;
-    }
-
-    public int getXBOX() {
-        return XBOX;
     }
 }
