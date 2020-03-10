@@ -13,8 +13,8 @@ import java.util.Optional;
 @Getter
 @Setter
 public class Millenium extends Bank {
-    public static final String RED_BOLD = "\033[1;31m";
-    public static final String GREEN_BOLD = "\033[1;32m";
+    public final String RED_BOLD = "\033[1;31m";
+    public final String GREEN_BOLD = "\033[1;32m";
     private String bankName;
 
     @Override
@@ -38,7 +38,7 @@ public class Millenium extends Bank {
                 .filter(x -> x.getClient().getSurname().equals(surname))
                 .forEach(x -> {
                     x.setMoney(x.getMoney() + money);
-                    x.setDate(new Date());
+                    x.setDate(new Date().toString().replaceAll(" ", "-"));
                     System.out.println(GREEN_BOLD + "SUCCESS!!!\nYOUR ACCOUNT IS NOW " + x.getMoney());
                 });
     }
@@ -50,7 +50,7 @@ public class Millenium extends Bank {
                 .forEach(x -> {
                     if (x.getMoney() > money) {
                         x.setMoney(x.getMoney() - money);
-                        x.setDate(new Date());
+                        x.setDate(new Date().toString().replaceAll(" ", "-"));
                         payMoney(client, money);
                         System.out.println("SUCCESS!!!");
                     } else {
@@ -66,7 +66,7 @@ public class Millenium extends Bank {
                 .forEach(x -> {
                     if (x.getMoney() > money) {
                         x.setMoney(x.getMoney() - money);
-                        x.setDate(new Date());
+                        x.setDate(new Date().toString().replaceAll(" ", "-"));
                         System.out.println("SUCCESS!!!");
                     } else {
                         System.out.println("FAILD");

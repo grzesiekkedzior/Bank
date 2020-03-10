@@ -20,8 +20,4 @@ public class Atm {
                 "----------------------------\n";
         return menu;
     }
-
-    public String getName() {
-        return name;
-    }
 }

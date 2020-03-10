@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static com.bank.Account.AccountNumber.createUuid;
+
 @Getter
 @Setter
 public class Account implements Serializable {
@@ -18,7 +20,7 @@ public class Account implements Serializable {
     private Client client;
     private int money;
     private int pin;
-    private Date date;
+    private String date;
 
     public  Account() {}
 
@@ -26,8 +28,12 @@ public class Account implements Serializable {
         this.client = client;
         this.money = money;
         this.pin = pin;
-        number = AccountNumber.createUuid().toString();
-        date = new Date();
+        this.number = createUuid().toString();
+        this.date = getCurrentDate();
+    }
+
+    private String getCurrentDate() {
+        return new Date().toString().replaceAll(" ", "-");
     }
 
     public static class AccountNumber {

@@ -4,6 +4,8 @@ import com.company.Millenium;
 import com.server.atm.AtmOperationBalance;
 import com.server.atm.AtmContext;
 import com.server.atm.AtmOperationWithdrawMoney;
+import com.server.checkfile.ClientChecker;
+import com.server.checkfile.FileChecker;
 import com.server.shop.ShopContext;
 import com.server.shop.ShopProductOperation;
 import com.server.transfermoney.TransferContext;
@@ -16,6 +18,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * This class doesn't have instance enywhere
+ */
 public class Server {
     private static final String ATM = "atm";
     private static final String BALANCE = "balance";
@@ -36,6 +41,7 @@ public class Server {
         AtmContext atmContext;
         TransferContext transferContext;
         ShopContext shopContext;
+
         try (var listener = new ServerSocket(59090)) {
             System.out.println("The date server is running...");
             while (true) {
@@ -45,17 +51,17 @@ public class Server {
                     if (str.equals(ATM)) {
                         String withdrawValue = clientConcretOperation(socket);
                         if (withdrawValue.equals(BALANCE)) {
-                            atmContext = new AtmContext(new AtmOperationBalance());
+                            atmContext = new AtmContext(AtmOperationBalance::new);
                             atmContext.showAtm(millenium, socket);
                         } else if (withdrawValue.equals(WITHDRAW)) {
-                            atmContext = new AtmContext(new AtmOperationWithdrawMoney());
+                            atmContext = new AtmContext(AtmOperationWithdrawMoney::new);
                             atmContext.showAtm(millenium, socket);
                         }
                     } else if (str.equals(TRANSFER)) {
-                        transferContext = new TransferContext(new TransferMoneyOperation());
+                        transferContext = new TransferContext(TransferMoneyOperation::new);
                         transferContext.showTransfer(millenium, socket);
                     } else if (str.equals(SHOP)) {
-                        shopContext = new ShopContext(new ShopProductOperation());
+                        shopContext = new ShopContext(ShopProductOperation::new);
                         shopContext.showShop(millenium, socket);
                     }
                 }

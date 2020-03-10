@@ -1,5 +1,6 @@
 package com.client;
 
+import com.bank.Bank;
 import com.transfer.AccountBalance;
 import com.transfer.Transaction;
 import com.transfer.WithdrawMoney;
@@ -30,10 +31,18 @@ public class AtmServer {
         if (num == 1) {
             putDataToCheckBalanceAccount(socket);
             getAccountBalanceObject(socket);
+            getTransactionData(socket);
         } else if (num == 2) {
             putDataToWithdrawMoney(socket);
             getWithdrawMoneyObject(socket);
+            getTransactionData(socket);
         }
+    }
+
+    private static void getTransactionData(Socket socket) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+        Bank millenium = (Bank) objectInputStream.readObject();
+        millenium.printTable();
     }
 
     private static void putDataToWithdrawMoney(Socket socket) throws IOException {
@@ -57,18 +66,20 @@ public class AtmServer {
     private static void putDataToCheckBalanceAccount(Socket socket) throws IOException {
         ObjectOutputStream withdrawObject = new ObjectOutputStream(socket.getOutputStream());
         withdrawObject.writeObject("balance");
+
         System.out.println("YOUR SURNAME");
         Scanner s = new Scanner(System.in);
         String surname = s.nextLine();
         ObjectOutputStream objectSurname = new ObjectOutputStream(socket.getOutputStream());
         objectSurname.writeObject(surname);
+
         System.out.println("YOUR PIN");
         Scanner p = new Scanner(System.in);
         Integer pin = p.nextInt();
         System.out.println(pin);
+
         ObjectOutputStream objectPin = new ObjectOutputStream(socket.getOutputStream());
         objectPin.writeObject(pin);
-
     }
 
     private static Socket startConnection() throws IOException {

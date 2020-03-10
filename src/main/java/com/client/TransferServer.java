@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class TransferServer {
@@ -38,14 +39,25 @@ public class TransferServer {
         }
     }
 
-    private static void getTransactionData(Socket socket) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-        Bank millenium = (Bank) objectInputStream.readObject();
-        millenium.printTable();
+    private static void getTransactionData(Socket socket) {
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            System.out.println("WRONG DATA!");
+        }
+        Bank millenium = null;
+        try {
+                millenium = (Bank) objectInputStream.readObject();
+                millenium.printTable();
+        } catch (IOException e) {
+            System.out.println("INCORECT VALUE !!!");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void putDataToTransferMoney(Socket socket) throws IOException {
-
         System.out.println("YOUR SURNAME");
         Scanner s = new Scanner(System.in);
         String surname = s.nextLine();
@@ -66,12 +78,23 @@ public class TransferServer {
     }
 
     private static void sendTransferName(Transfer transfer, Socket socket) throws IOException {
-        var out = new PrintWriter(socket.getOutputStream(), true);
-        out.println(transfer.getName());
+            var out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(transfer.getName());
     }
 
-    private static Socket startConnection() throws IOException {
-        InetAddress inetAddress = Inet4Address.getLocalHost();
-        return new Socket(inetAddress, 59090);
+    private static Socket startConnection() {
+        Socket socket = null;
+        InetAddress inetAddress = null;
+        try {
+            inetAddress = Inet4Address.getLocalHost();
+        } catch (UnknownHostException e) {
+            System.out.println("CLIENT DOESNT EXIST!");
+        }
+        try {
+            socket = new Socket(inetAddress, 59090);
+        } catch (IOException e) {
+            System.out.println("CLIENT DOESNT EXIST!");
+        }
+        return socket;
     }
 }

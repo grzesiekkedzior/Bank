@@ -1,9 +1,7 @@
 package com.transfer;
 
 import com.bank.Bank;
-
 import java.io.IOException;
-import java.util.function.Supplier;
 
 public class WithdrawMoney implements Transaction {
     private Bank bank;

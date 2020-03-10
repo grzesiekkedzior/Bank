@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TableDataBase {
-    public static final String YELLOW_BOLD = "\033[1;33m";
+    public final String YELLOW_BOLD = "\033[1;33m";
     Bank bank;
     List<String> headersList = new ArrayList<>();
     List<List<String>> rowsList = new ArrayList<>();
@@ -134,7 +134,6 @@ public class TableDataBase {
         fillSpace(stringBuilder, cellPaddingSize);
 
         stringBuilder.append(TABLE_V_SPLIT_SYMBOL);
-
     }
 
     public void createHeaderList() {

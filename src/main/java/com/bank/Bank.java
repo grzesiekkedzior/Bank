@@ -14,13 +14,13 @@ public abstract class Bank implements BankMenu, Serializable{
     public void saveToDatabase() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/database.txt"));) {
             for (Account a : getAccountList()) {
-                writer.write(String.format("%10d | %15s | %15s | %15s | %10s | %10d \r\n",
-                        a.getPin(),
-                        a.getNumber(),
-                        a.getClient().getName(),
-                        a.getClient().getSurname(),
-                        a.getDate(),
-                        a.getMoney()));
+                writer.write(
+                        a.getPin() + " " +
+                        a.getNumber() + " " +
+                        a.getClient().getName() + " " +
+                        a.getClient().getSurname() + " " +
+                        a.getDate() + " " +
+                        a.getMoney());
             }
         }
     }
